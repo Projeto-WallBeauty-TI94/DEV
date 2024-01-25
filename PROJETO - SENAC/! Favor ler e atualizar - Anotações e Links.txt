@@ -1,0 +1,21 @@
+							-	MANUTENÇÕES	-
+
+	
+				Se realmente fomos seguir esse sistema favor ASSITIR o vídeo inteiro
+				*BASE DE PROJETO* - https://youtu.be/U5Gw3en7BsA?si=ggKz2CzQH1mcChn6
+
+- Funcionário X só faz serviço Y, portanto na hora do login de cada FUNCIONÁRIO ele só pode marcar certo tipo de serviço, quem determina isso é o administrador de sistema
+
+- Formatar as tabelas de agendamento (ñ mostrar ID para usuário - APENAS NA VERSÃO FINAL)
+
+- Pensar no desenvolvimento da parte de movimentações citada no video (no nosso caso sera apenas de SERVIÇOS 6:00 do vídeo)
+- Tentar imaginar como vamos fazer o QUADRO DE HORÁRIOS (9:49 DO VÍDEO)
+
+*Sugestão - Na primeira tela colocar o exemplo de QUADRO DE HORÁRIOS, facilitando para o usuário ver a agenda e para fazer novos agendamentos. 	S U G E S T Ã O
+
+*Opcional - Adicionar uma guia de RELATÓRIO contendo todos agendamentos marcados concluidos e etc...
+
+
+----------------------------------------------------------- | ------------------------------------------------------
+
+Favor atualizar com os arquivos @David & @Lucas (Diagramas & Site)
