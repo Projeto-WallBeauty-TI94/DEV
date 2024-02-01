@@ -64,7 +64,7 @@ $u = new user;
                     <div class="errmsg" style="font-size: 20px; color: red; font-weight:bold;">
                         <!-- LOGIN -->
                         <?php
-                        if (isset($_POST['login'])) {
+                        if (isset($_POST['email'])) {
                             $email =  ($_POST['email']);
                             $senha =  ($_POST['senha']);
 

@@ -8,24 +8,24 @@ class user
         $host = "localhost";
         $user = "root";
         $pass = "";
-        $dbname = "projeto";
+        $dbname = "db_projeto";
         $pdo = new PDO("mysql:host=$host;dbname=" . $dbname, $user, $pass);
     }
 
-    function cadastrar($nome, $email, $senha, $fone)
+    function cadastrar($nome, $fone, $email, $senha)
     {
         global $pdo;
-        $sql = $pdo->prepare("select id from usuario where email=:e");
+        $sql = $pdo->prepare("select ID from cliente where EMAIL=:e");
         $sql->bindValue(":e", $email);
         $sql->execute();
         if ($sql->rowCount() > 0) {
             return false;
         } else {
-            $sql = $pdo->prepare("insert into usuario(nome,email,senha,fone)value(:n,:e,:s,:f)");
+            $sql = $pdo->prepare("insert into cliente(NOME, TEL, EMAIL, DATA_INSCRICAO, senha)value(:n,:t,:e,NOW(),:s)");
             $sql->bindValue(":n", $nome);
+            $sql->bindValue(":t", $fone);
             $sql->bindValue(":e", $email);
             $sql->bindValue(":s", md5($senha));
-            $sql->bindValue(":f", $fone);
             $sql->execute();
             return true;
         }
@@ -35,7 +35,7 @@ class user
     public function logar($email, $senha)
     {
         global $pdo;
-        $sql = $pdo->prepare("select id from usuario where email=:e and senha=:s");
+        $sql = $pdo->prepare("select id from cliente where email=:e and senha=:s");
         $sql->bindValue(":e", $email);
         $sql->bindValue(":s", md5($senha));
         $sql->execute();

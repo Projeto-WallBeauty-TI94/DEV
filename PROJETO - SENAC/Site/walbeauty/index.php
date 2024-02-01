@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-
-
 <head>
     <meta charset="utf-8" />
     <title>WalBeauty</title>
@@ -24,12 +22,14 @@
 <body>
     <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease"
         role="banner" class="navigation-bar w-nav">
-        <div class="w-container"><a href="/" aria-current="page" class="brand-link w-nav-brand w--current">
+        <div class="w-container">
+            <a href="/" aria-current="page" class="brand-link w-nav-brand w--current">
                 <h1 class="brand-text">WalBeauty</h1>
             </a>
-            <nav role="navigation" class="navigation-menu w-nav-menu"><a href="index.php" aria-current="page"
-                    class="navigation-link w-nav-link w--current">Inicio</a><a href="user.php"
-                    class="navigation-link w-nav-link">Login</a></nav>
+            <nav role="navigation" class="navigation-menu w-nav-menu">
+                <a href="index.php" aria-current="page" class="navigation-link w-nav-link w--current">Inicio</a>
+                <a href="loginPage.php" class="navigation-link w-nav-link">Login</a>
+            </nav>
             <div class="hamburger-button w-nav-button">
                 <div class="w-icon-nav-menu"></div>
             </div>
@@ -51,30 +51,23 @@
             </div>
             <div class="w-row fazemos">
                 <div class="w-col w-col-4">
-                    <div class="white-box"><img
-                            src="https://assets-global.website-files.com/6567d83b7b7ab663a1c292fa/6567d83b7b7ab663a1c29375_feather-15-white.svg"
-                            alt="" class="grid-image" />
+                    <div class="white-box">
+                        <img src="https://assets-global.website-files.com/6567d83b7b7ab663a1c292fa/6567d83b7b7ab663a1c29375_feather-15-white.svg" alt="" class="grid-image" />
                         <h3>Coisas</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
-                            elementum tristique.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
                     </div>
                 </div>
                 <div class="w-col w-col-4">
-                    <div class="white-box"><img
-                            src="https://assets-global.website-files.com/6567d83b7b7ab663a1c292fa/6567d83b7b7ab663a1c2935e_feather2-17-white.svg"
-                            width="210" alt="" class="grid-image" />
+                    <div class="white-box"><img src="https://assets-global.website-files.com/6567d83b7b7ab663a1c292fa/6567d83b7b7ab663a1c2935e_feather2-17-white.svg" width="210" alt="" class="grid-image" />
                         <h3>Mais coisas</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
-                            elementum tristique.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
                     </div>
                 </div>
                 <div class="w-col w-col-4">
-                    <div class="white-box"><img
-                            src="https://assets-global.website-files.com/6567d83b7b7ab663a1c292fa/6567d83b7b7ab663a1c29386_feather2-22-white.svg"
-                            alt="" class="grid-image" />
+                    <div class="white-box">
+                        <img src="https://assets-global.website-files.com/6567d83b7b7ab663a1c292fa/6567d83b7b7ab663a1c29386_feather2-22-white.svg" alt="" class="grid-image" />
                         <h3>Ainda mais coisas</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
-                            elementum tristique.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
                     </div>
                 </div>
             </div>

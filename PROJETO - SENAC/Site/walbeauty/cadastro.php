@@ -43,7 +43,7 @@ $u = new user;
             </a>
             <nav role="navigation" class="navigation-menu w-nav-menu">
                 <a href="index.php" class="navigation-link w-nav-link">Inicio</a>
-                <a href="user.php" aria-current="page" class="navigation-link w-nav-link w--current">Login</a>
+                <a href="loginPage.php" aria-current="page" class="navigation-link w-nav-link w--current">Login</a>
             </nav>
             <div class="hamburger-button w-nav-button">
                 <div class="w-icon-nav-menu"></div>
@@ -76,6 +76,7 @@ $u = new user;
 
                     <input type="password" class="form-field w-input" maxlength="256" name="senha2" data-name="senha2" placeholder="Confirme sua senha..." id="senha2" required="" onblur="return validarSenha()" />
                     <span id="msg" style="color: red;"></span><br><br>
+
 
                     <input type="submit" value="Cadastrar" class="button full-width w-button" name="enviar" /><br>
                     <p>OU</p>

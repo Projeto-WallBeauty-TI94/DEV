@@ -2,7 +2,7 @@
    $host = "localhost";
    $user = "root";
    $pass = "";
-   $bdname = "projeto";
+   $bdname = "db_projeto";
    $port = "3306";
 
    try
