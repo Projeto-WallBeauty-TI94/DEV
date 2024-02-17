@@ -16,7 +16,7 @@ if (isset($_POST['enviar'])) {
     if (!empty($nome) && !empty($fone) && !empty($email) && !empty($email2) && !empty($senha) && !empty($senha2) ) {
         $u->conectar('root', "");
         if ($u->cadastrar($nome, $fone, $email, $senha)) {
-            header("Location: index.php"); // Redireciona para index.php
+            header("Location: loginPage.php"); // Redireciona para index.php
             exit;
         }
     }

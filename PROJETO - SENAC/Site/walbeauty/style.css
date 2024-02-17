@@ -230,7 +230,6 @@ html {
   }
   
   body {
-    min-height: 100%;
     color: #333;
     background-color: #fff;
     margin: 0;
@@ -1871,6 +1870,10 @@ html {
     text-decoration: none;
     position: relative;
   }
+
+  .img-logo{
+    max-width: 50px;
+  }
   
   .w-nav-link {
     vertical-align: top;
@@ -2135,13 +2138,13 @@ html {
     --light-slate-gray: #8e8e9c;
   }
   
-  body {
+  /* body {
     color: #6a859c;
     background-color: #edeff2;
     font-family: Open Sans, sans-serif;
     font-size: 16px;
     line-height: 20px;
-  }
+  } */
   
   h1 {
     margin-top: 0;
@@ -2313,16 +2316,27 @@ html {
     padding-bottom: 242px;
   }
   
+  .containerCar {
+    position: relative; /* Adicione posição relativa para .containerCar */
+}
+
   .hero-section.centered {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    object-fit: fill;
+    width: 80%; /* Defina a largura com uma unidade relativa */
+    /* object-fit: fill;
     background-image: url("img/xbkgOi.jpg");
     background-position: 50%;
-    background-size: cover;
-    border-bottom: 4px solid #69b9ff;
-    padding-top: 195px;
-    padding-bottom: 195px;
+    background-size: cover; */
+    /* border-bottom: 4px solid #69b9ff; */
+    /* padding-top: 195px;
+    padding-bottom: 195px; */
   }
+
   
   .hero-heading {
     color: #ff0095;
@@ -2606,10 +2620,6 @@ html {
     min-height: 100vh;
   } */
 
-  body {
-    height: 100%;
-    margin: 0;
-  }
 
 .errmsg{
   font-size: 20px;
@@ -2617,3 +2627,95 @@ html {
   font-weight: bold;
 }
 
+#linkAgenda{
+  text-decoration: none;
+}
+
+.carousel-inner .item img {
+  width: 100%; /* or width: 100% !important; */
+  }
+
+
+
+
+
+
+    /* Estilos base para o conteúdo */
+.hero-heading {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.hero-subheading {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.button, .hollow-button {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+/* Media queries para dispositivos móveis */
+@media only screen and (max-width: 600px) {
+  .hero-heading {
+      font-size: 24px;
+  }
+  
+  .hero-subheading {
+      font-size: 14px;
+  }
+  
+  .button, .hollow-button {
+      padding: 2px 4px;
+      font-size: 14px;
+  }
+}
+
+/* Media queries para tablets e telas menores */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .hero-heading {
+      font-size: 28px;
+  }
+  
+  .hero-subheading {
+      font-size: 16px;
+  }
+  
+  .button, .hollow-button {
+      padding: 4px 8px;
+      font-size: 15px;
+  }
+}
+
+/* Media queries para telas maiores */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .hero-heading {
+      font-size: 36px;
+  }
+  
+  .hero-subheading {
+      font-size: 20px;
+  }
+  
+  .button, .hollow-button {
+      padding: 14px 28px;
+      font-size: 18px;
+  }
+}
+
+/* Media queries para telas grandes */
+@media only screen and (min-width: 1025px) {
+  .hero-heading {
+      font-size: 42px;
+  }
+  
+  .hero-subheading {
+      font-size: 24px;
+  }
+  
+  .button, .hollow-button {
+      padding: 16px 32px;
+      font-size: 20px;
+  }
+}

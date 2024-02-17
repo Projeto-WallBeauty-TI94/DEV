@@ -1,4 +1,7 @@
 <?php 
+// ini_set('session.gc_maxlifetime', 86400);
+
+
    $host = "localhost";
    $user = "root";
    $pass = "";

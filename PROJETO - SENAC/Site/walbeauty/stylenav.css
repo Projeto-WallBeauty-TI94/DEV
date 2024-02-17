@@ -1,0 +1,17 @@
+.navigation-bar {
+    background-color: #fff;
+}
+.w-nav {
+    z-index: 1000;
+    background: rgb(255, 255, 255);
+    position: fixed;
+    width: 100%;
+}
+
+.w-row{
+    display: flex;
+    width: 100%;
+
+}
+
+
