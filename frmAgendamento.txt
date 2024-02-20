@@ -1,0 +1,189 @@
+using MySqlConnector;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace Projeto_V1.Forms
+{
+    public partial class frmAgendamento : Form
+    {
+        banco bd = new banco();       
+        string sql;
+        MySqlCommand cmd;
+        string Id;
+
+        public frmAgendamento()
+        {
+            InitializeComponent();
+            busca();
+            FillCliente();
+            FillServico();
+            FillFuncionario();
+
+            cbHora.SelectedIndex = 0;
+        }
+        //------------------------------------------------------------funções---------------------------------------------------------
+
+
+        
+        private void busca()
+        {
+            bd.abrirConn();
+            sql = "SELECT Agendamento.ID as ID, Cliente.NOME AS Cliente, Servico.NOME AS Serviço, Funcionario.NOME AS Funcionário, Agendamento.DATA_AGENDAMENTO as Data, Servico.PRECO as Preço, Agendamento.STATUS as Status " +
+                  "FROM agendamento " +
+                  "INNER JOIN cliente ON Agendamento.FK_CLIENTE_ID = cliente.id " +
+                  "INNER JOIN servico ON Agendamento.FK_SERVICO_ID = servico.id " +
+                  "INNER JOIN funcionario ON Agendamento.FUNCIONARIO_ID = funcionario.id ";
+
+            cmd = new MySqlCommand(sql, bd.conecta);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.SelectCommand = cmd;
+            DataTable dataTable = new DataTable();
+            da.Fill(dataTable);
+            dataGridView1.DataSource = dataTable;
+        }
+
+        private void FillCliente()
+        {
+            bd.abrirConn();
+            sql = "select nome from cliente";
+            cmd = new MySqlCommand(sql, bd.conecta);
+
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            {
+                cbCliente.DataSource = dt;
+                cbCliente.DisplayMember = "nome";
+            }
+
+        }
+
+
+        private void FillFuncionario()
+        {
+            bd.abrirConn();
+            sql = "select nome from funcionario";
+            cmd = new MySqlCommand(sql, bd.conecta);
+
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            {
+                cbFunc.DataSource = dt;
+                cbFunc.DisplayMember = "nome";
+            }
+
+        }
+        private void FillServico()
+        {
+            bd.abrirConn();
+            sql = "select nome, preco from servico"; // Adiciona o preço à consulta SQL
+            cmd = new MySqlCommand(sql, bd.conecta);
+
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            {
+                cbServico.DataSource = dt;
+                cbServico.DisplayMember = "nome";
+            }
+        }
+
+        private bool AgendamentoExistente()
+        {
+            string sqlVerificar = @"
+SELECT COUNT(*) 
+FROM agendamento 
+WHERE FUNCIONARIO_ID = (SELECT ID FROM funcionario WHERE nome = @Funcionario LIMIT 1) 
+AND FK_CLIENTE_ID = (SELECT ID FROM cliente WHERE nome = @Cliente LIMIT 1) 
+AND FK_SERVICO_ID = (SELECT ID FROM servico WHERE nome = @Servico LIMIT 1) 
+AND DATA_AGENDAMENTO = @Data 
+AND HORA_AGENDAMENTO = @Hora";
+
+            using (MySqlCommand cmdVerificar = new MySqlCommand(sqlVerificar, bd.conecta))
+            {
+                cmdVerificar.Parameters.AddWithValue("@Funcionario", cbFunc.Text);
+                cmdVerificar.Parameters.AddWithValue("@Cliente", cbCliente.Text);
+                cmdVerificar.Parameters.AddWithValue("@Servico", cbServico.Text);
+                cmdVerificar.Parameters.AddWithValue("@Data", dtAgendamento.Value.Date);
+                cmdVerificar.Parameters.AddWithValue("@Hora", cbHora.Text);
+
+                int count = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                return count > 0;
+            }
+        }
+
+        //----------------------------------------butões----------------------------------------
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            bd.abrirConn();
+
+            // Verifica se já existe um agendamento com os mesmos dados
+            if (AgendamentoExistente())
+            {
+                MessageBox.Show("Já existe um agendamento com esses dados.");
+                return; // Sai do método para evitar a inserção
+            }
+
+            DateTime dataSelecionada = dtAgendamento.Value.Date; // Obtém a data selecionada
+            string horaSelecionada = cbHora.SelectedItem.ToString(); // Obtém a hora selecionada
+            DateTime dataHoraSelecionada = dataSelecionada.Add(TimeSpan.Parse(horaSelecionada));
+
+            // Se não existir, realiza a inserção
+            string sqlInserir = @"
+INSERT INTO `agendamento`(`FUNCIONARIO_ID`, `FK_CLIENTE_ID`, `FK_SERVICO_ID`, `DATA_AGENDAMENTO`) 
+SELECT f.ID AS FUNCIONARIO_ID, c.ID AS FK_CLIENTE_ID, s.ID AS FK_SERVICO_ID, @HoraAgenda 
+FROM funcionario f
+INNER JOIN cliente c ON c.ID = (SELECT ID FROM cliente WHERE nome = @Cliente LIMIT 1)
+INNER JOIN servico s ON s.ID = (SELECT ID FROM servico WHERE nome = @Serv LIMIT 1)
+WHERE f.ID = (SELECT ID FROM funcionario WHERE nome = @Func LIMIT 1)";
+
+            cmd = new MySqlCommand(sqlInserir, bd.conecta);
+            cmd.Parameters.AddWithValue("@Func", cbFunc.Text);
+            cmd.Parameters.AddWithValue("@Serv", cbServico.Text);
+            cmd.Parameters.AddWithValue("@Cliente", cbCliente.Text);
+ 
+            cmd.Parameters.AddWithValue("@HoraAgenda", dataHoraSelecionada);
+
+            cmd.ExecuteNonQuery();
+            MessageBox.Show("Agendamento adicionado com sucesso!");
+            busca();
+        }
+
+        private void cbServico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Obtém o preço do serviço selecionado
+            DataRowView selectedService = cbServico.SelectedItem as DataRowView;
+            if (selectedService != null)
+            {
+                string preco = selectedService["preco"].ToString();
+                tbPreco.Text = preco;
+            }
+        }
+
+        //---------------------------------------metódus----------------------------
+      
+
+      
+
+
+
+    }
+}
+
+
+
